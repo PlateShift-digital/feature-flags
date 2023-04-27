@@ -42,5 +42,14 @@
         "psr-4": {
             "Test\\PlateShift\\FeatureFlagBundle\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-without-coverage": "vendor/bin/phpunit --config=phpunit-no-coverage.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
