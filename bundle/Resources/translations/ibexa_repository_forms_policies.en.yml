@@ -1,0 +1,9 @@
+policy.limitation.identifier.configurationscope: Configuration Scope
+plateshift.feature_flag.general: General
+plateshift.feature_flag.siteaccess.list: Siteaccess
+plateshift.feature_flag.siteaccess.group.list: Siteaccess Groups
+
+plateshift.feature_flag.scope.global: Global
+plateshift.feature_flag.scope.default: Default
+
+policy.limitation.identifier.featuregroups: Feature Groups

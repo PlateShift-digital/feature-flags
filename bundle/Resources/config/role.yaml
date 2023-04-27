@@ -1,0 +1,19 @@
+services:
+    plateshift.limitation.form_mapper.configuration_scope:
+        class: PlateShift\FeatureFlagBundle\Limitation\ConfigurationScopeLimitationMapper
+        lazy: true
+        arguments:
+            - "%ibexa.site_access.list%"
+            - "%ibexa.site_access.groups%"
+        tags:
+            - { name: ibexa.admin_ui.limitation.mapper.form, limitationType: ConfigurationScope }
+            - { name: ibexa.admin_ui.limitation.mapper.value, limitationType: ConfigurationScope }
+
+    plateshift.limitation.form_mapper.feature_groups_scope:
+        class: PlateShift\FeatureFlagBundle\Limitation\FeatureGroupsLimitationMapper
+        lazy: true
+        arguments:
+            - "%plateshift.feature.flag.feature_groups%"
+        tags:
+            - { name: ibexa.admin_ui.limitation.mapper.form, limitationType: FeatureGroups }
+            - { name: ibexa.admin_ui.limitation.mapper.value, limitationType: FeatureGroups }

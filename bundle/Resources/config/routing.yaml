@@ -1,0 +1,10 @@
+plateshift_featureFlag_dashboard:
+    path: /feature-flag/dashboard
+    methods:
+        - GET
+    defaults:
+        _controller: plateshift.feature_flag_dashboard.controller:dashboard
+
+plateshift_featureFlag.admin_ui.rest:
+    resource: '@PlateShiftFeatureFlagBundle/Resources/config/routing_rest.yaml'
+    prefix: '%ibexa.rest.path_prefix%'

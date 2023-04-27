@@ -1,0 +1,24 @@
+services:
+    plateshift.feature_flag_dashboard.controller:
+        class: PlateShift\FeatureFlagBundle\Controller\DashboardController
+        autowire: true
+        lazy: true
+        arguments:
+            - '@security.authorization_checker'
+            - '@plateshift.feature_flag.repository'
+            - '%ibexa.site_access.groups_by_site_access%'
+            - '%plateshift.feature.flag.feature_list%'
+        tags:
+            - { name: controller.service_arguments }
+
+    plateshift.feature_flag_operation.controller:
+        class: PlateShift\FeatureFlagBundle\Controller\FeatureFlagOperationController
+        autowire: true
+        lazy: true
+        arguments:
+            - '@security.authorization_checker'
+            - '@plateshift.feature_flag.repository'
+            - '@plateshift.repository.service.feature_flag'
+            - '%plateshift.feature.flag.feature_list%'
+        tags:
+            - { name: controller.service_arguments }

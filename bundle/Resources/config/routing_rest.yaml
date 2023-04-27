@@ -1,0 +1,27 @@
+#
+# Feature Flag Operations
+#
+
+plateshift_featureFlag.list:
+    path: /feature-flag/list/{scope}
+    options:
+        expose: true
+    defaults:
+        _controller: 'plateshift.feature_flag_operation.controller:list'
+    methods: ['GET']
+
+plateshift_featureFlag.change:
+    path: /feature-flag
+    options:
+        expose: true
+    defaults:
+        _controller: 'plateshift.feature_flag_operation.controller:change'
+    methods: ['POST']
+
+plateshift_featureFlag.reset:
+    path: /feature-flag
+    options:
+        expose: true
+    defaults:
+        _controller: 'plateshift.feature_flag_operation.controller:reset'
+    methods: ['DELETE']

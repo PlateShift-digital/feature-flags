@@ -1,0 +1,19 @@
+services:
+    PlateShift\FeatureFlagBundle\Core\Persistence\Gateway\DoctrineDatabase:
+        public: false
+        arguments:
+            - '@ibexa.persistence.connection'
+    PlateShift\FeatureFlagBundle\Core\Persistence\Gateway\ExceptionConversion:
+        public: false
+        arguments:
+            - '@PlateShift\FeatureFlagBundle\Core\Persistence\Gateway\DoctrineDatabase'
+
+    PlateShift\FeatureFlagBundle\Core\Persistence\Legacy\Handler:
+        public: false
+        arguments:
+            - '@PlateShift\FeatureFlagBundle\Core\Persistence\Gateway\ExceptionConversion'
+    PlateShift\FeatureFlagBundle\Core\Persistence\Cache\Handler:
+        public: false
+        arguments:
+            - '@PlateShift\FeatureFlagBundle\Core\Persistence\Legacy\Handler'
+            - '@ibexa.cache_pool'

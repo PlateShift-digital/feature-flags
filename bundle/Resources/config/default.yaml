@@ -1,0 +1,3 @@
+parameters:
+    plateshift.feature_flag.allow_cookie_manipulation: false
+    plateshift.feature_flag.feature_list: []

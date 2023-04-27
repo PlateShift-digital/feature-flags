@@ -1,0 +1,6 @@
+services:
+    plateshift.view_cache.response_tagger.feature_flag:
+        class: PlateShift\FeatureFlagBundle\ResponseTagger\Value\FeatureFlagTagger
+        parent: ibexa.http_cache.view_cache.response_tagger.abstract_value
+        tags:
+            - {name: ibexa.cache.http.response.tagger}

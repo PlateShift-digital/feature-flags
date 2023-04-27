@@ -1,0 +1,30 @@
+tables:
+    plate_shift_feature_flag:
+        indexes:
+            feature_identifier_scope_index:
+                fields:
+                    - identifier
+                    - scope
+        uniqueConstraints:
+            feature_identifier_scope:
+                fields:
+                    - identifier
+                    - scope
+        fields:
+            identifier:
+                type: string
+                nullable: false
+                length: 128
+                options:
+                    default: ''
+            scope:
+                type: string
+                nullable: false
+                length: 128
+                options:
+                    default: ''
+            enabled:
+                type: boolean
+                nullable: false
+                options:
+                    default: '0'

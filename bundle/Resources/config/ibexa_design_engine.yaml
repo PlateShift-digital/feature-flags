@@ -1,0 +1,3 @@
+templates_theme_paths:
+    standard:
+        - '%kernel.project_dir%/vendor/plateshift/feature-flag-bundle/bundle/Resources/views'

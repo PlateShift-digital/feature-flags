@@ -1,0 +1,48 @@
+services:
+    plateshift.repository.service.inner_feature_flag:
+        class: PlateShift\FeatureFlagBundle\Core\Repository\FeatureFlagService
+        public: true
+        arguments:
+            - '@PlateShift\FeatureFlagBundle\Core\Persistence\Cache\Handler'
+            - '@translator'
+            - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+            - '%plateshift.feature.flag.feature_list%'
+
+    plateshift.repository.service.event_feature_flag:
+        class: PlateShift\FeatureFlagBundle\Core\Event\FeatureFlagService
+        public: true
+        arguments:
+            - '@plateshift.repository.service.inner_feature_flag'
+            - '@event_dispatcher'
+
+    plateshift.repository.service.feature_flag:
+        alias: 'plateshift.repository.service.event_feature_flag'
+
+    plateshift.feature_flag.repository:
+        class: PlateShift\FeatureFlagBundle\Services\FeatureFlagRepository
+        public: true
+        arguments:
+            - '@plateshift.repository.service.feature_flag'
+            - '@translator.default'
+            - '@Ibexa\HttpCache\ResponseTagger\Delegator\DispatcherTagger'
+            - '%plateshift.feature.flag.feature_list%'
+            - '%ibexa.site_access.list%'
+            - '%ibexa.site_access.groups_by_site_access%'
+            - '%kernel.debug%'
+        calls:
+            - ['setSiteAccess', ['@Ibexa\Core\MVC\Symfony\SiteAccess']]
+
+    PlateShift\FeatureFlagBundle\API\FeatureFlagRepository: '@plateshift.feature_flag.repository'
+
+    # policy limitation services.
+    plateshift.api.role.limitation_type.configuration_scope:
+        class: PlateShift\FeatureFlagBundle\Core\Limitation\ConfigurationScopeLimitationType
+        tags:
+            - {name: ibexa.permissions.limitation_type, alias: ConfigurationScope}
+
+    plateshift.api.role.limitation_type.feature_group_scope:
+        class: PlateShift\FeatureFlagBundle\Core\Limitation\FeatureGroupsLimitationType
+        arguments:
+            - '%plateshift.feature.flag.feature_list%'
+        tags:
+            - {name: ibexa.permissions.limitation_type, alias: FeatureGroups}

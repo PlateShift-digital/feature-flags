@@ -1,0 +1,3 @@
+plate_shift_feature_flag:
+    change: [ ConfigurationScope, FeatureGroups ]
+    dashboard: ~

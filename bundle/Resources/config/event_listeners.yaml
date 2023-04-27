@@ -1,0 +1,30 @@
+services:
+    PlateShift\FeatureFlagBundle\EventListener\ConfigurationScopeListener:
+        public: false
+        arguments:
+            - '@plateshift.feature_flag.repository'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    PlateShift\FeatureFlagBundle\EventListener\BuildSchemaListener:
+        public: false
+        arguments:
+            - '@=service("kernel").locateResource("@PlateShiftFeatureFlagBundle/Resources/schema/doctrine.yaml")'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    PlateShift\FeatureFlagBundle\EventListener\AdminFeatureFlagTabListener:
+        public: false
+        calls:
+            - ['setAuthorizationChecker', ['@security.authorization_checker']]
+            - ['setTranslator', ['@translator']]
+            - ['setFactory', ['@knp_menu.factory']]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    PlateShift\FeatureFlagBundle\EventListener\FeatureFlagEventsSubscriber:
+        public: false
+        arguments:
+            - '@ibexa.http_cache.purge_client'
+        tags:
+            - { name: kernel.event_subscriber }

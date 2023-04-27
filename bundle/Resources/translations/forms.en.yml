@@ -1,0 +1,5 @@
+role.policy.plate_shift_feature_flag: Feature Flag
+
+role.policy.plate_shift_feature_flag.all_functions: All functions
+role.policy.plate_shift_feature_flag.change: Change
+role.policy.plate_shift_feature_flag.dashboard: Dashboard

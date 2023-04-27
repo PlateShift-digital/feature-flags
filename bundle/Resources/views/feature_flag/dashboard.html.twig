@@ -1,0 +1,21 @@
+{% extends '@ibexadesign/ui/layout.html.twig' %}
+
+{% trans_default_domain "feature_flag" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row align-items-stretch ibexa-main-row ibexa-dashboard-row">
+            <div class="col-md-12">
+                <div id="plateshift-feature-flag-dashboard-table" data-scopes="{{ scopes|json_encode }}" data-feature-definitions="{{ featureDefinitions|json_encode }}"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('plateshift-feature-flag-dashboard-js', null, 'ibexa') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('plateshift-feature-flag-dashboard-css', null, 'ibexa') }}
+{% endblock %}

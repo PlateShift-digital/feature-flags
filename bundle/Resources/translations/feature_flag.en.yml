@@ -1,0 +1,20 @@
+# admin menu
+menu.button.text: Feature Flags
+
+# dashboard
+table.header.name: Feature Flags
+table.column.head.name: Name
+table.column.head.description: Description
+table.column.head.state: State
+table.column.head.source: Source
+table.column.head.change: Change
+table.column.row.loading: Feature Flags are loading...
+
+# feature state
+feature.enabled: Enabled
+feature.disabled: Disabled
+feature.inherited: Inherited
+feature.scope._definition_: Definition
+feature.scope._temp_: Temporary
+feature.scope.global: Global
+feature.scope.default: Default
