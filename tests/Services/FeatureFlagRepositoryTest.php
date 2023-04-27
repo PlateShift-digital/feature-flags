@@ -3,7 +3,7 @@
 namespace Test\PlateShift\FeatureFlagBundle\Services;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use EzSystems\PlatformHttpCacheBundle\ResponseTagger\Delegator\DispatcherTagger;
+use Ibexa\HttpCache\ResponseTagger\Delegator\DispatcherTagger;
 use PlateShift\FeatureFlagBundle\API\Repository\FeatureFlagService;
 use PHPUnit\Framework\TestCase;
 use PlateShift\FeatureFlagBundle\Services\FeatureFlagRepository;
@@ -14,6 +14,20 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class FeatureFlagRepositoryTest extends TestCase
 {
+    public function setUp(): void
+    {
+        set_error_handler(
+            static function ( $errno, $errstr ) {
+                throw new \Exception( $errstr, $errno );
+            },
+            E_ALL
+        );
+    }
+
+    public function tearDown(): void
+    {
+        restore_error_handler();
+    }
     /**
      * @param bool $debugEnabled
      *
@@ -100,7 +114,7 @@ class FeatureFlagRepositoryTest extends TestCase
      */
     public function requesting_undefined_feature_triggers_error_with_debug_enabled(): void
     {
-        $this->expectWarning();
+        $this->expectExceptionMessage('Feature with identifier "undefined_feature" is in neither storage, cache or definition!');
 
         $this->getFeatureRepository(true)->get('undefined_feature');
     }
