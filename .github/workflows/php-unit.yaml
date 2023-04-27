@@ -1,4 +1,4 @@
-name: PHP Unit
+name: Tests
 
 on:
     push:
@@ -10,8 +10,10 @@ permissions:
     contents: read
 
 jobs:
-    build:
+    php-unit:
         runs-on: ubuntu-latest
+        env:
+            XDEBUG_MODE: coverage
         steps:
             -   uses: actions/checkout@v3
 
@@ -28,9 +30,6 @@ jobs:
                         ${{ runner.os }}-php-
             -   name: Install dependencies
                 run: composer install --prefer-dist --no-progress
-
-            # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-            # Docs: https://getcomposer.org/doc/articles/scripts.md
 
             -   name: Run test suite
                 run: composer run-script test
